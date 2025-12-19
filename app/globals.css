@@ -1,28 +1,5 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+/* Import del font Press Start 2P per lo stile retrò */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 * {
   box-sizing: border-box;
@@ -30,13 +7,32 @@ body {
   margin: 0;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+html, body {
+  font-family: 'Press Start 2P', cursive;
+  transition: background-color 0.3s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+/* Migliora la leggibilità delle textarea */
+.nes-textarea {
+  line-height: 1.8;
+  font-size: 0.8rem;
+}
+
+/*Modifica i bottoni della navbar e i nes-container*/
+.nes-btn{
+  border-style: none;
+}
+
+.nes-container.is-rounded, .nes-container.is-rounded.is-dark{
+  border-image: unset;
+  box-shadow: inset -4px -4px #adafbc;
+  border-color: transparent;
+  border-color: whitesmoke;
 }

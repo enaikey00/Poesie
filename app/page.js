@@ -1,66 +1,54 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+
+import { useAuth } from './AuthContext'
+import { useTheme } from './ThemeContext'
+import Link from 'next/link'
 
 export default function Home() {
+  const { user, loading } = useAuth()
+  const { theme } = useTheme()
+
+  if (loading) {
+    return <div>Caricamento...</div>
+  }
+
+  const containerClass = theme === 'dark' 
+    ? 'nes-container is-rounded is-dark' 
+    : 'nes-container is-rounded'
+  
+  const textColor = theme === 'dark' ? '#fff' : '#212529'
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+    <main>
+      <h1 style={{ color: textColor, textAlign: 'center' }}>Poesie Retrò 📜</h1>
+      <div className={containerClass} style={{marginTop: '2rem'}}>
+        <p>Benvenuto nel sito delle poesie in stile retrò!</p>
+        <p style={{marginTop: '1rem'}}>
+          {user 
+            ? 'Qui potrai leggere e condividere le tue poesie.' 
+            : 'Fai login per iniziare a condividere le tue poesie!'
+          }
+        </p>
+        
+        {!user && (
+          <div style={{marginTop: '2rem'}}>
+            <Link href="/login" className="nes-btn is-primary">
+              Inizia ora!
+            </Link>
+          </div>
+        )}
+        
+        {user && (
+          <div style={{marginTop: '2rem'}}>
+            <Link href="/nuova" className="nes-btn is-success">
+              ✍️ Scrivi una poesia
+            </Link>
+            <Link href="/poesie" className="nes-btn" style={{marginLeft: '1rem'}}>
+              📜 Vedi tutte le poesie
+            </Link>
+          </div>
+        )}
+      </div>
+    </main>
+  )
 }
