@@ -25,7 +25,7 @@ html, body {
   font-size: 0.8rem;
 }
 
-/*Modifica i bottoni della navbar e i nes-container*/
+/* --- Modifica i bottoni della navbar e i nes-container ---*/
 .nes-btn{
   border-style: none;
 }
@@ -33,6 +33,79 @@ html, body {
 .nes-container.is-rounded, .nes-container.is-rounded.is-dark{
   border-image: unset;
   box-shadow: inset -4px -4px #adafbc;
+  /*
   border-color: transparent;
+  */
   border-color: whitesmoke;
+}
+/* ----------------------------------------- */
+/* Card poesia con colori dinamici */
+.poesia-card {
+  transition: transform 0.2s, color 0.2s;
+  text-decoration: none;
+}
+
+/* Tema scuro */
+.poesia-card.theme-dark {
+  color: #fff;
+}
+
+.poesia-card.theme-dark:hover {
+  color: indianred; /* colore rossastro */
+  transform: scale(1.02);
+}
+
+/* Tema chiaro */
+.poesia-card.theme-light {
+  color: #212529;
+}
+
+.poesia-card.theme-light:hover {
+  color: #209cee; /* colore azzurrino */
+  transform: scale(1.02);
+}
+
+/* ----------------------------------------- */
+/* Responsive Navbar */
+.navbar-desktop {
+  display: flex;
+}
+
+.navbar-mobile {
+  display: none;
+}
+
+/* Mobile: sotto 768px */
+@media (max-width: 768px) {
+  .navbar-desktop {
+    display: none;
+  }
+  
+  .navbar-mobile {
+    display: block;
+  }
+
+  .container {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1rem !important;
+  }
+
+  .nes-btn {
+    font-size: 0.7rem;
+  }
+
+  /* Grid poesie responsive */
+  [style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Tablet: tra 768px e 1024px */
+@media (max-width: 1024px) {
+  .user-greeting {
+    display: none;
+  }
 }

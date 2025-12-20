@@ -87,15 +87,13 @@ export default function Poesie() {
                 href={`/poesie/${poesia.id}`}
                 style={{ textDecoration: 'none' }}
               >
-                <div 
-                  className={containerClass}
-                  style={{
-                    height: '100%',
-                    cursor: 'pointer',
-                    transition: 'transform 0.2s',
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.02)'}
-                  onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+              <div 
+                className={`${containerClass} poesia-card theme-${theme}`}
+                style={{
+                  height: '100%',
+                  cursor: 'pointer',
+                  borderColor: theme === 'dark' ? '#2d3339' : 'whitesmoke',
+                }}
                 >
                   <h3 style={{marginBottom: '0.5rem'}}>
                     {poesia.titolo}

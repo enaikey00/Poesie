@@ -21,7 +21,11 @@ export default function Home() {
   return (
     <main>
       <h1 style={{ color: textColor, textAlign: 'center' }}>Poesie Retrò 📜</h1>
-      <div className={containerClass} style={{marginTop: '2rem'}}>
+      <div className={containerClass} 
+      style={{
+        marginTop: '2rem',
+        borderColor: theme === 'dark' ? '#2d3339' : 'whitesmoke',
+        }}>
         <p>Benvenuto nel sito delle poesie in stile retrò!</p>
         <p style={{marginTop: '1rem'}}>
           {user 
