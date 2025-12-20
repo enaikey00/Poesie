@@ -185,17 +185,30 @@ export default function Home() {
                   </Link>
                 ) : (
                   <div style={{position: 'relative', display: 'inline-block'}}>
-                    <button 
+                    <div
                       className="nes-btn"
-                      disabled
-                      style={{cursor: 'not-allowed', opacity: 0.5}}
-                      onMouseEnter={() => setShowTooltip(true)}
-                      onMouseLeave={() => setShowTooltip(false)}
-                      onClick={() => setShowTooltip(true)}
+                      style={{cursor: 'not-allowed', opacity: 0.5, display: 'inline-block'}}
+                      onMouseEnter={() => {
+                        console.log('Mouse ENTRA - showTooltip diventa TRUE')
+                        setShowTooltip(true)
+                      }}
+                      onMouseLeave={() => {
+                        console.log('Mouse ESCE - showTooltip diventa FALSE')
+                        setShowTooltip(false)
+                      }}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        console.log('CLICK - showTooltip diventa TRUE per 3 secondi')
+                        setShowTooltip(true)
+                        setTimeout(() => {
+                          console.log('TIMEOUT - showTooltip diventa FALSE')
+                          setShowTooltip(false)
+                        }, 3000)
+                      }}
                       title="Devi fare login!"
                     >
                       📜 Vedi tutte le poesie
-                    </button>
+                    </div>
                     <div 
                       style={{
                         position: 'absolute',
@@ -212,7 +225,7 @@ export default function Home() {
                         zIndex: 1000,
                         pointerEvents: 'none',
                         opacity: showTooltip ? 1 : 0,
-                        transition: 'opacity 0.1s ease-in-out',
+                        transition: 'opacity 0.5s ease-in-out',
                         visibility: showTooltip ? 'visible' : 'hidden',
                       }}
                     >
