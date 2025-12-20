@@ -23,9 +23,21 @@ export default function DettaglioPoesia() {
   const [editContenuto, setEditContenuto] = useState('')
   const [editDataPoesia, setEditDataPoesia] = useState('')
 
+  // Protezione: reindirizza al login se non autenticato
   useEffect(() => {
-    fetchPoesia()
-  }, [params.id])
+    if (!user) {
+      router.push('/login')
+    }
+  }, [user, router])
+
+  useEffect(() => {
+    if (user && params.id) {
+      fetchPoesia()
+    }
+  }, [params.id, user])
+
+  // Non mostrare niente mentre controlla l'autenticazione
+  if (!user) { return <div>Reindirizzamento al login... </div> }
 
   const fetchPoesia = async () => {
     try {

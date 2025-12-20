@@ -11,6 +11,7 @@ export default function Login() {
   const [isSignUp, setIsSignUp] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   
   const { signIn, signUp } = useAuth()
   const router = useRouter()
@@ -77,14 +78,34 @@ export default function Login() {
 
           <div className="nes-field" style={{marginBottom: '1rem'}}>
             <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              className="nes-input is-dark"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <div style={{position: 'relative'}}>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                className="nes-input is-dark"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                style={{paddingRight: '3rem'}}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                style={{
+                  position: 'absolute',
+                  right: '0.5rem',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontSize: '1.2rem',
+                }}
+                title={showPassword ? 'Nascondi password' : 'Mostra password'}
+              >
+                {showPassword ? '🙈' : '👁️'}
+              </button>
+            </div>
           </div>
 
           {error && (

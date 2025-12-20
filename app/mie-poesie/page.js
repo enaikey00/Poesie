@@ -15,13 +15,14 @@ export default function MiePoesie() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
+  // Protezione: reindirizza al login se non autenticato
   useEffect(() => {
     if (!user) {
       router.push('/login')
       return
     }
     fetchMiePoesie()
-  }, [user])
+  }, [user, router])
 
   const fetchMiePoesie = async () => {
     try {

@@ -2,18 +2,31 @@
 
 import { useState, useEffect } from 'react'
 import { useTheme } from '../ThemeContext'
+import { useAuth } from '../AuthContext'
 import { supabase } from '@/lib/supabase'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 export default function Poesie() {
   const { theme } = useTheme()
+  const { user, loading: authLoading } = useAuth()
+  const router = useRouter()
   const [poesie, setPoesie] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
+  // Protezione: reindirizza al login se non autenticato
   useEffect(() => {
-    fetchPoesie()
-  }, [])
+    if (!authLoading && !user) {
+      router.push('/login')
+    }
+  }, [user, authLoading, router])
+
+  useEffect(() => {
+    if (user) {
+      fetchPoesie()
+    }
+  }, [user])
 
   const fetchPoesie = async () => {
     try {
@@ -29,6 +42,11 @@ export default function Poesie() {
     } finally {
       setLoading(false)
     }
+  }
+
+  // Non mostrare niente mentre controlla l'autenticazione
+  if (authLoading || !user) {
+    return <div>Caricamento...</div>
   }
 
   const textColor = theme === 'dark' ? '#fff' : '#212529'
