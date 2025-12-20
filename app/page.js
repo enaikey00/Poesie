@@ -191,31 +191,33 @@ export default function Home() {
                       style={{cursor: 'not-allowed', opacity: 0.5}}
                       onMouseEnter={() => setShowTooltip(true)}
                       onMouseLeave={() => setShowTooltip(false)}
+                      onClick={() => setShowTooltip(true)}
                       title="Devi fare login!"
                     >
                       📜 Vedi tutte le poesie
                     </button>
-                    {showTooltip && (
-                      <div 
-                        style={{
-                          position: 'absolute',
-                          bottom: '110%',
-                          left: '50%',
-                          transform: 'translateX(-50%)',
-                          backgroundColor: theme === 'dark' ? '#212529' : '#fff',
-                          color: theme === 'dark' ? '#fff' : '#212529',
-                          border: '4px solid',
-                          borderColor: theme === 'dark' ? '#fff' : '#212529',
-                          padding: '0.5rem 1rem',
-                          whiteSpace: 'nowrap',
-                          fontSize: '0.8rem',
-                          zIndex: 1000,
-                          pointerEvents: 'none',
-                        }}
-                      >
-                        🔑 Devi fare login!
-                      </div>
-                    )}
+                    <div 
+                      style={{
+                        position: 'absolute',
+                        bottom: '110%',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        backgroundColor: theme === 'dark' ? '#212529' : '#fff',
+                        color: theme === 'dark' ? '#fff' : '#212529',
+                        border: '4px solid',
+                        borderColor: theme === 'dark' ? '#fff' : '#212529',
+                        padding: '0.5rem 1rem',
+                        whiteSpace: 'nowrap',
+                        fontSize: '0.8rem',
+                        zIndex: 1000,
+                        pointerEvents: 'none',
+                        opacity: showTooltip ? 1 : 0,
+                        transition: 'opacity 0.1s ease-in-out',
+                        visibility: showTooltip ? 'visible' : 'hidden',
+                      }}
+                    >
+                      🔑 Devi fare login!
+                    </div>
                   </div>
                 )}
               </div>
