@@ -67,8 +67,12 @@ html, body {
 
 /* ----------------------------------------- */
 /* Responsive Navbar */
+
+/* Responsive Navbar */
 .navbar-desktop {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .navbar-mobile {
@@ -78,11 +82,11 @@ html, body {
 /* Mobile: sotto 768px */
 @media (max-width: 768px) {
   .navbar-desktop {
-    display: none;
+    display: none !important;
   }
   
   .navbar-mobile {
-    display: block;
+    display: block !important;
   }
 
   .container {

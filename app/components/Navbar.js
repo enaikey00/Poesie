@@ -23,7 +23,7 @@ export default function Navbar() {
   return (
     <nav style={{ marginBottom: '2rem' }}>
       {/* Navbar Desktop */}
-      <div className="navbar-desktop" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="navbar-desktop">
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
           <Link href="/" className="nes-btn">
             🏠 Home
@@ -73,8 +73,7 @@ export default function Navbar() {
       <div className="navbar-mobile">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Link href="/" className="nes-btn">
-            🏠
-          </Link>
+          🏠 Home </Link>
           
           <div style={{ display: 'flex', gap: '0.5rem' }}>
             <button 
