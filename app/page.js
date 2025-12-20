@@ -178,39 +178,45 @@ export default function Home() {
                 </p>
               )}
 
-              <div style={{position: 'relative', display: 'inline-block'}}>
+              <div>
                 {user ? (
                   <Link href="/poesie" className="nes-btn is-primary">
                     📜 Vedi tutte le poesie
                   </Link>
                 ) : (
-                  <>
+                  <div style={{position: 'relative', display: 'inline-block'}}>
                     <button 
                       className="nes-btn"
                       disabled
                       style={{cursor: 'not-allowed', opacity: 0.5}}
                       onMouseEnter={() => setShowTooltip(true)}
                       onMouseLeave={() => setShowTooltip(false)}
+                      title="Devi fare login!"
                     >
                       📜 Vedi tutte le poesie
                     </button>
                     {showTooltip && (
                       <div 
-                        className={theme === 'dark' ? 'nes-balloon from-left is-dark' : 'nes-balloon from-left'}
                         style={{
                           position: 'absolute',
-                          bottom: '120%',
+                          bottom: '110%',
                           left: '50%',
                           transform: 'translateX(-50%)',
+                          backgroundColor: theme === 'dark' ? '#212529' : '#fff',
+                          color: theme === 'dark' ? '#fff' : '#212529',
+                          border: '4px solid',
+                          borderColor: theme === 'dark' ? '#fff' : '#212529',
+                          padding: '0.5rem 1rem',
                           whiteSpace: 'nowrap',
-                          fontSize: '0.7rem',
-                          zIndex: 10
+                          fontSize: '0.8rem',
+                          zIndex: 1000,
+                          pointerEvents: 'none',
                         }}
                       >
-                        <p>Devi fare login! 🔑</p>
+                        🔑 Devi fare login!
                       </div>
                     )}
-                  </>
+                  </div>
                 )}
               </div>
             </div>
