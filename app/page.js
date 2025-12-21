@@ -46,7 +46,7 @@ export default function Home() {
 
   return (
     <main>
-      <h1 style={{ color: textColor, textAlign: 'center' }}>Poesie Retrò 📜</h1>
+      <h1 style={{ color: textColor, textAlign: 'center'}}>Poesie in condivisione</h1>
       
       {/* Container di benvenuto */}
       <div className={containerClass}       
@@ -54,11 +54,11 @@ export default function Home() {
         marginTop: '2rem',
         borderColor: theme === 'dark' ? '#2d3339' : 'whitesmoke',
         }}>
-        <p>Benvenuto nel sito delle poesie in stile retrò!</p>
+        <p>Benvenuto nel sito delle poesie in condivisione.</p>
         <p style={{marginTop: '1rem'}}>
           {user 
             ? 'Qui potrai leggere e condividere le tue poesie.' 
-            : 'Fai login per iniziare a condividere le tue poesie!'
+            : 'Qui puoi leggere le anteprime delle ultime poesie e fare il login per iniziare a condividere le tue.'
           }
         </p>
         
@@ -122,32 +122,26 @@ export default function Home() {
                       {poesia.titolo}
                     </h3>
                     
-                    <p style={{fontSize: '0.7rem', opacity: 0.7, marginBottom: '1rem'}}>
-                      di {poesia.autore}
+                    <p style={{fontSize: '1rem', opacity: 0.7, marginBottom: '1rem'}}>
+                      di <span style={{fontFamily: 'Borel'}} >{poesia.autore}</span>
                     </p>
                     
                     <p style={{
-                      fontSize: '0.8rem',
-                      lineHeight: '1.6',
+                      fontSize: '1rem',
+                      lineHeight: '1.4',
                       overflow: 'hidden',
                       textOverflow: 'ellipsis',
                       display: '-webkit-box',
                       WebkitLineClamp: 4,
                       WebkitBoxOrient: 'vertical',
-                      marginBottom: '1rem'
+                      marginBottom: '1rem',
+                      whiteSpace: 'pre-wrap',
+                      wordBreak: 'break-word'
                     }}>
                       {poesia.contenuto}
                     </p>
-                    
-                    <div style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      fontSize: '0.6rem',
-                      opacity: 0.6,
-                      borderTop: '2px solid',
-                      borderColor: theme === 'dark' ? '#fff' : '#212529',
-                      paddingTop: '0.5rem'
-                    }}>
+
+                    <div className="poesia-card-footer">
                       <span>📅 {new Date(poesia.data_poesia).toLocaleDateString('it-IT')}</span>
                       <span>{user ? '👁️ Leggi tutto' : '🔒 Login richiesto'}</span>
                     </div>

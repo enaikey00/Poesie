@@ -3,6 +3,7 @@ import './globals.css';
 import { AuthProvider } from './AuthContext';
 import { ThemeProvider } from './ThemeContext';
 import Navbar from './components/Navbar';
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata = {
   title: 'Poesie Retrò',

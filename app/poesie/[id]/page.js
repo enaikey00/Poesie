@@ -135,12 +135,44 @@ export default function DettaglioPoesia() {
 
   const isAuthor = user && user.id === poesia.user_id
 
+  const handleDownload = () => {
+    // Crea il contenuto del file
+    const contenutoFile = `${poesia.titolo}
+
+  Autore: ${poesia.autore}
+  Data: ${new Date(poesia.data_poesia).toLocaleDateString('it-IT', { 
+    day: 'numeric', 
+    month: 'long', 
+    year: 'numeric' 
+  })}
+
+  ---
+
+  ${poesia.contenuto}
+  `
+
+    // Crea un blob con il contenuto
+    const blob = new Blob([contenutoFile], { type: 'text/plain;charset=utf-8' })
+    
+    // Crea un link temporaneo per il download
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `${poesia.titolo.replace(/[^a-z0-9]/gi, '_')}.txt`
+    
+    // Simula il click e pulisce
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+  }
+
   return (
     <main>
       {!isEditing ? (
         // MODALITÀ VISUALIZZAZIONE
         <>
-          <div style={{marginBottom: '1rem'}}>
+          <div style={{marginBottom: '3rem'}}>
             <Link href="/poesie" className="nes-btn">
               ← Tutte le poesie
             </Link>
@@ -150,45 +182,55 @@ export default function DettaglioPoesia() {
           
           <div className={containerClass} style={{marginTop: '2rem'}}>
             <div style={{marginBottom: '1rem', paddingBottom: '1rem', borderBottom: '2px solid', borderColor: theme === 'dark' ? '#fff' : '#212529'}}>
-              <p style={{fontSize: '0.8rem'}}>
-                📝 <strong>Autore:</strong> {poesia.autore}
+              <p style={{fontSize: '1rem'}}>
+                <strong>Autore:</strong> <span style={{fontFamily: 'Borel'}} >{poesia.autore}</span>
               </p>
-              <p style={{fontSize: '0.8rem', marginTop: '0.5rem'}}>
-                📅 <strong>Data:</strong> {new Date(poesia.data_poesia).toLocaleDateString('it-IT', { 
+              <p style={{fontSize: '1rem', marginTop: '0.5rem', opacity: 0.6}}>
+                <strong>Data:</strong> {new Date(poesia.data_poesia).toLocaleDateString('it-IT', { 
                   day: 'numeric', 
                   month: 'long', 
                   year: 'numeric' 
                 })}
               </p>
-              <p style={{fontSize: '0.7rem', marginTop: '0.5rem', opacity: 0.6}}>
-                Pubblicato il {new Date(poesia.created_at).toLocaleDateString('it-IT')}
-              </p>
+              
             </div>
 
-            <div style={{
+            <div
+            style={{
               whiteSpace: 'pre-wrap',
               lineHeight: '1.8',
-              fontSize: '0.9rem',
+              fontSize: '1.3rem',
               padding: '1rem 0'
             }}>
               {poesia.contenuto}
             </div>
           </div>
 
-          {isAuthor && (
-            <div style={{marginTop: '2rem', display: 'flex', gap: '1rem'}}>
+          {user && (
+            <div style={{marginTop: '2rem', display: 'flex', gap: '1rem', flexWrap: 'wrap'}}>
               <button 
-                onClick={() => setIsEditing(true)}
-                className="nes-btn is-warning"
+                onClick={handleDownload}
+                className="nes-btn is-primary"
               >
-                ✏️ Modifica
+                💾 Scarica
               </button>
-              <button 
-                onClick={handleDelete}
-                className="nes-btn is-error"
-              >
-                🗑️ Cancella
-              </button>
+              
+              {isAuthor && (
+                <>
+                  <button 
+                    onClick={() => setIsEditing(true)}
+                    className="nes-btn is-warning"
+                  >
+                    ✏️ Modifica
+                  </button>
+                  <button 
+                    onClick={handleDelete}
+                    className="nes-btn is-error"
+                  >
+                    🗑️ Cancella
+                  </button>
+                </>
+              )}
             </div>
           )}
         </>

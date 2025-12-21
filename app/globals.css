@@ -1,6 +1,26 @@
 /* Import del font Press Start 2P per lo stile retrò */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+/* Import del font Borel */
+@font-face {
+  font-family: 'Borel';
+  src: url('/fonts/Borel-Regular.ttf') format('truetype');
+  /* Se hai più formati, puoi aggiungerli per compatibilità */
+  /* src: url('/fonts/nome-font.woff2') format('woff2'),
+       url('/fonts/nome-font.woff') format('woff'),
+       url('/fonts/nome-font.ttf') format('truetype'); */
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Import del font Baskerville */
+@font-face {
+  font-family: 'Baskerville';
+  src: url('/fonts/Baskerville.ttf') format('truetype');
+}
+
+/* --- --- --- --- --- --- --- --- */
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -8,9 +28,30 @@
 }
 
 html, body {
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Baskerville', 'Press Start 2P', cursive, sans-serif;
   transition: background-color 0.3s ease;
+  line-height: 1;
 }
+
+h1 {
+  font-family: 'Borel';
+  font-size: 3rem;
+}
+h2 {
+  font-family: 'Borel';
+  font-size: 2.5rem;
+}
+div, p {
+  font-family: 'Baskerville';
+  font-weight: Bold;
+  font-size: 1.5rem;
+}
+
+.autore {
+  font-family: 'Baskerville';
+}
+
+
 
 .container {
   max-width: 1200px;
@@ -30,20 +71,43 @@ html, body {
   border-style: none;
 }
 
-.nes-container.is-rounded, .nes-container.is-rounded.is-dark{
+.nes-container.is-rounded, .nes-container.is-rounded.is-dark, .nes-input, .nes-input.is-dark, .nes-textarea, .nes-textarea.is-dark{
   border-image: unset;
   box-shadow: inset -4px -4px #adafbc;
   /*
   border-color: transparent;
   */
+}
+
+.nes-container.is-rounded, .nes-input, .nes-textarea {
   border-color: whitesmoke;
 }
+
+.nes-container.is-rounded.is-dark, .nes-input.is-dark, .nes-textarea.is-dark {
+  border-color: #2d3339;
+}
+
 /* ----------------Card Poesie------------------------- */
 /* Card poesia con colori dinamici */
 .poesia-card {
   transition: transform 0.2s, color 0.2s;
   text-decoration: none;
+  display: flex;
+  flex-direction: column;
 }
+
+/* Footer sempre in fondo */
+.poesia-card-footer {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  opacity: 0.6;
+  border-top: 2px solid;
+}
+
+
 
 /* Tema scuro */
 .poesia-card.theme-dark {

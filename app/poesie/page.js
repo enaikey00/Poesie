@@ -117,32 +117,26 @@ export default function Poesie() {
                     {poesia.titolo}
                   </h3>
                   
-                  <p style={{fontSize: '0.7rem', opacity: 0.7, marginBottom: '1rem'}}>
-                    di {poesia.autore}
+                  <p style={{fontSize: '1rem', opacity: 0.7, marginBottom: '1rem'}}>
+                    di <span style={{fontFamily: 'Borel'}} >{poesia.autore}</span>
                   </p>
                   
                   <p style={{
-                    fontSize: '0.8rem',
+                    fontSize: '1rem',
                     lineHeight: '1.6',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     display: '-webkit-box',
                     WebkitLineClamp: 4,
                     WebkitBoxOrient: 'vertical',
-                    marginBottom: '1rem'
+                    marginBottom: '1rem',
+                    whiteSpace: 'pre-wrap',
+                    wordBreak: 'break-word'
                   }}>
                     {poesia.contenuto}
                   </p>
                   
-                  <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    fontSize: '0.6rem',
-                    opacity: 0.6,
-                    borderTop: '2px solid',
-                    borderColor: theme === 'dark' ? '#fff' : '#212529',
-                    paddingTop: '0.5rem'
-                  }}>
+                  <div className="poesia-card-footer">
                     <span>📅 {new Date(poesia.data_poesia).toLocaleDateString('it-IT')}</span>
                     <span>👁️ Leggi tutto</span>
                   </div>

@@ -21,7 +21,7 @@ export default function Navbar() {
   const textColor = theme === 'dark' ? '#fff' : '#212529'
 
   return (
-    <nav style={{ marginBottom: '2rem' }}>
+    <nav style={{ marginBottom: '3rem' }}>
       {/* Navbar Desktop */}
       <div className="navbar-desktop">
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>

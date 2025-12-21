@@ -93,7 +93,7 @@ export default function NuovaPoesia() {
               onChange={(e) => setDataPoesia(e.target.value)}
               required
             />
-            <p style={{fontSize: '0.7rem', marginTop: '0.5rem', opacity: 0.7}}>
+            <p style={{fontSize: '1rem', marginTop: '0.5rem', opacity: 0.7}}>
               (La data in cui hai scritto la poesia)
             </p>
           </div>
@@ -110,7 +110,7 @@ export default function NuovaPoesia() {
               placeholder="Scrivi qui la tua poesia..."
               rows="10"
               required
-              style={{minHeight: '300px'}}
+              style={{minHeight: '300px', fontSize: '1.2rem'}}
             />
           </div>
 
@@ -143,7 +143,7 @@ export default function NuovaPoesia() {
 
       <div className={containerClass} style={{marginTop: '2rem', maxWidth: '800px'}}>
         <h3 style={{marginBottom: '1rem'}}>💡 Suggerimenti:</h3>
-        <ul style={{lineHeight: '2'}}>
+        <ul style={{lineHeight: '1.5', marginLeft: '1rem'}}>
           <li>Scrivi con il cuore 💖</li>
           <li>Non ci sono regole nella poesia!</li>
           <li>Puoi modificare o cancellare le tue poesie dopo averle pubblicate</li>
