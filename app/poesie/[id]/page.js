@@ -6,6 +6,9 @@ import { useAuth } from '../../AuthContext'
 import { useTheme } from '../../ThemeContext'
 import { supabase } from '@/lib/supabase'
 import Link from 'next/link'
+import CalendarIcon from '../../components/CalendarIcon'
+import SaveIcon from '../../components/SaveIcon'
+
 
 export default function DettaglioPoesia() {
   const params = useParams()
@@ -188,7 +191,7 @@ export default function DettaglioPoesia() {
                 <strong>Autore:</strong> <span style={{fontFamily: 'Borel'}} >{poesia.autore}</span>
               </p>
               <p style={{fontSize: '0.9rem', marginTop: '0.5rem'}}>
-                📅 <strong>Data:</strong> {poesia.data_poesia ? new Date(poesia.data_poesia).toLocaleDateString('it-IT', { 
+                <CalendarIcon size={20} style={{verticalAlign: 'bottom'}} /> <strong>Data:</strong> {poesia.data_poesia ? new Date(poesia.data_poesia).toLocaleDateString('it-IT', { 
                   day: 'numeric', 
                   month: 'long', 
                   year: 'numeric' 
@@ -214,7 +217,7 @@ export default function DettaglioPoesia() {
                 onClick={handleDownload}
                 className="nes-btn is-primary"
               >
-                💾 Scarica
+                <SaveIcon size={22}/> Scarica
               </button>
               
               {isAuthor && (

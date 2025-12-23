@@ -1,11 +1,11 @@
-export default function CalendarIcon({ size = 24 }) {
+export default function CalendarIcon({ size = 24, style={} }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 100 100"
       width={size}
       height={size}
-      style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '0.3rem', transform: 'scale(0.8)' }}
+      style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '0.3rem', transform: 'scale(0.8)', ...style }}
     >
       <path fill="#EBEDED" d="M100 95a5 5 0 0 1-5 5H5a5 5 0 0 1-5-5V5a5 5 0 0 1 5-5h90a5 5 0 0 1 5 5z"/>
       <path fill="#D4D7DA" d="M95 97H5a5 5 0 0 1-5-5v3a5 5 0 0 0 5 5h90a5 5 0 0 0 5-5v-3a5 5 0 0 1-5 5"/>

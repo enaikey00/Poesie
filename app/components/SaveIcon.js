@@ -1,11 +1,11 @@
-export default function SaveIcon({ size = 24 }) {
+export default function SaveIcon({ size = 24, style={} }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 100 100"
       width={size}
       height={size}
-      style={{ display: 'inline-block', verticalAlign: 'top', marginRight: '0.3rem', transform: 'scale(1.1)'}}
+      style={{ display: 'inline-block', verticalAlign: 'top', marginRight: '0.3rem', transform: 'scale(1.1)', ...style}}
     >
       <path fill="#23475F" d="M88.555 0H83v.016a2 2 0 0 1-2 2H19a2 2 0 0 1-2-2V0H4a4 4 0 0 0-4 4v92.016a4 4 0 0 0 4 4h92a4 4 0 0 0 4-4V11.525C100.049 11.436 88.564.071 88.555 0"/>
       <path fill="#1C3C50" d="M81.04 53.016H18.96a2 2 0 0 0-2 2v45h66.08v-45c0-1.106-.895-2-2-2m-61.957-10h61.834a2 2 0 0 0 2-2V.555A1.99 1.99 0 0 1 81 2.015H19c-.916 0-1.681-.62-1.917-1.46v40.46a2 2 0 0 0 2 2.001"/>

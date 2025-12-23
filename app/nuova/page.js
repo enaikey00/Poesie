@@ -153,12 +153,12 @@ export default function NuovaPoesia() {
             >
               {loading ? (
                 <>
-                  <RocketIcon size={20} style={{ marginRight: '0.3rem' }} />
+                  <RocketIcon size={25} style={{ marginRight: '0.3rem' }} />
                   Pubblicazione...
                 </>
               ) : (
                 <>
-                  <RocketIcon size={20} style={{ marginRight: '0.3rem' }} />
+                  <RocketIcon size={25} style={{ marginRight: '0.3rem' }} />
                   Pubblica
                 </>
               )}
@@ -179,7 +179,7 @@ export default function NuovaPoesia() {
       <div className={containerClass} style={{marginTop: '2rem', maxWidth: '800px'}}>
         <h3 style={{marginBottom: '1rem'}}>💡 Suggerimenti:</h3>
         <ul style={{lineHeight: '1.5', marginLeft: '1rem'}}>
-          <li>Scrivi con il cuore 💖</li>
+          <li>Scrivi con il cuore</li>
           <li>Non ci sono regole nella poesia!</li>
           <li>Puoi modificare o cancellare le tue poesie dopo averle pubblicate</li>
         </ul>
