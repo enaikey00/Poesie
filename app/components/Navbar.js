@@ -5,6 +5,13 @@ import { useAuth } from '../AuthContext'
 import { useTheme } from '../ThemeContext'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+//import { FcHome } from "react-icons/fc";
+//import { HouseLine } from "@phosphor-icons/react";
+import EarthIcon from '../components/EarthIcon'
+import BookIcon from '../components/BookIcon'
+import MailIcon from '../components/MailIcon'
+import SaveIcon from '../components/SaveIcon'
+import MagicIcon from '../components/MagicIcon'
 
 export default function Navbar() {
   const { user, signOut } = useAuth()
@@ -26,18 +33,22 @@ export default function Navbar() {
       <div className="navbar-desktop">
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
           <Link href="/" className="nes-btn">
-            🏠 Home
+          <EarthIcon size={20} />
+            Home
           </Link>
           {user && (
             <>
               <Link href="/poesie" className="nes-btn">
-                📜 Tutte
+                <BookIcon size={20} />
+                Tutte
               </Link>
               <Link href="/mie-poesie" className="nes-btn">
-                📚 Le mie
+                <MailIcon size={20} />
+                Le mie
               </Link>
               <Link href="/nuova" className="nes-btn is-success">
-                ✍️ Scrivi
+                <MagicIcon size={20} />
+                Scrivi
               </Link>
             </>
           )}

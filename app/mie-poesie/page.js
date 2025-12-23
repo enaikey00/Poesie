@@ -6,6 +6,9 @@ import { useTheme } from '../ThemeContext'
 import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import BookIcon from '../components/BookIcon'
+import MagicIcon from '../components/MagicIcon'
+import CalendarIcon from '../components/CalendarIcon'
 
 export default function MiePoesie() {
   const { user } = useAuth()
@@ -53,7 +56,10 @@ export default function MiePoesie() {
   if (loading) {
     return (
       <main>
-        <h1 style={{ color: textColor, textAlign: 'center' }}>📚 Le Mie Poesie</h1>
+        <h1 style={{ color: textColor, textAlign: 'center' }}>
+          <BookIcon size={45} style={{ verticalAlign: 'middle', marginRight: '1rem', marginBottom: '0.5rem'}} /> 
+          Le Mie Poesie
+        </h1>        
         <div className={containerClass} style={{marginTop: '2rem', textAlign: 'center'}}>
           <p>Caricamento...</p>
         </div>
@@ -64,7 +70,10 @@ export default function MiePoesie() {
   if (error) {
     return (
       <main>
-        <h1 style={{ color: textColor, textAlign: 'center' }}>📚 Le Mie Poesie</h1>
+        <h1 style={{ color: textColor, textAlign: 'center' }}>
+          <BookIcon size={45} style={{ verticalAlign: 'middle', marginRight: '1rem', marginBottom: '0.5rem'}} /> 
+          Le Mie Poesie
+        </h1>
         <div className="nes-container is-rounded is-error" style={{marginTop: '2rem'}}>
           <p>Errore: {error}</p>
         </div>
@@ -74,13 +83,17 @@ export default function MiePoesie() {
 
   return (
     <main>
-      <h1 style={{ color: textColor, textAlign: 'center' }}>📚 Le Mie Poesie</h1>
+      <h1 style={{ color: textColor, textAlign: 'center' }}>
+        <BookIcon size={45} style={{ verticalAlign: 'middle', marginRight: '1rem', marginBottom: '0.5rem'}} /> 
+        Le Mie Poesie
+      </h1>
       
       {poesie.length === 0 ? (
         <div className={containerClass} style={{marginTop: '2rem', textAlign: 'center'}}>
           <p>Non hai ancora scritto nessuna poesia.</p>
           <Link href="/nuova" className="nes-btn is-success" style={{marginTop: '1rem'}}>
-            ✍️ Scrivi la tua prima poesia
+            <MagicIcon size={20}/>
+            Scrivi la tua prima poesia
           </Link>
         </div>
       ) : (
@@ -109,7 +122,7 @@ export default function MiePoesie() {
                 }}
                 >
                   <h3 style={{marginBottom: '0.5rem'}}>
-                    {poesia.titolo}
+                    {poesia.titolo || ''}
                   </h3>
                   
                   <p style={{
@@ -128,8 +141,8 @@ export default function MiePoesie() {
                   </p>
                   
                   <div className="poesia-card-footer">
-                    <span>📅 {new Date(poesia.data_poesia).toLocaleDateString('it-IT')}</span>
-                    <span>✏️ Modifica</span>
+                    <span><CalendarIcon size={20} /> {poesia.data_poesia ? new Date(poesia.data_poesia).toLocaleDateString('it-IT') : '---'}</span>
+                    <span><MagicIcon size={20} style={{transform: 'scale(0.8)', verticalAlign: 'middle' }}/> Modifica</span>
                   </div>
                 </div>
               </Link>

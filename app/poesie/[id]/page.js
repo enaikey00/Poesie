@@ -22,6 +22,7 @@ export default function DettaglioPoesia() {
   const [editTitolo, setEditTitolo] = useState('')
   const [editContenuto, setEditContenuto] = useState('')
   const [editDataPoesia, setEditDataPoesia] = useState('')
+  const [editUsaData, setEditUsaData] = useState(false) // date check box
 
   // Protezione: reindirizza al login se non autenticato
   useEffect(() => {
@@ -49,9 +50,10 @@ export default function DettaglioPoesia() {
 
       if (error) throw error
       setPoesia(data)
-      setEditTitolo(data.titolo)
+      setEditTitolo(data.titolo || '')
       setEditContenuto(data.contenuto)
-      setEditDataPoesia(data.data_poesia)
+      setEditDataPoesia(data.data_poesia || '')
+      setEditUsaData(!!data.data_poesia) // Checkbox attiva se c'è una data
     } catch (error) {
       setError(error.message)
     } finally {
@@ -67,9 +69,9 @@ export default function DettaglioPoesia() {
       const { error } = await supabase
         .from('poesie')
         .update({
-          titolo: editTitolo,
+          titolo: editTitolo.trim() || null,
           contenuto: editContenuto,
-          data_poesia: editDataPoesia,
+          data_poesia: editDataPoesia || null,
           updated_at: new Date().toISOString()
         })
         .eq('id', params.id)
@@ -137,14 +139,14 @@ export default function DettaglioPoesia() {
 
   const handleDownload = () => {
     // Crea il contenuto del file
-    const contenutoFile = `${poesia.titolo}
+  const contenutoFile = `${poesia.titolo || 'Senza titolo'}
 
   Autore: ${poesia.autore}
-  Data: ${new Date(poesia.data_poesia).toLocaleDateString('it-IT', { 
+  Data: ${poesia.data_poesia ? new Date(poesia.data_poesia).toLocaleDateString('it-IT', { 
     day: 'numeric', 
     month: 'long', 
     year: 'numeric' 
-  })}
+  }) : 'sconosciuta'}
 
   ---
 
@@ -185,12 +187,12 @@ export default function DettaglioPoesia() {
               <p style={{fontSize: '1rem'}}>
                 <strong>Autore:</strong> <span style={{fontFamily: 'Borel'}} >{poesia.autore}</span>
               </p>
-              <p style={{fontSize: '1rem', marginTop: '0.5rem', opacity: 0.6}}>
-                <strong>Data:</strong> {new Date(poesia.data_poesia).toLocaleDateString('it-IT', { 
+              <p style={{fontSize: '0.9rem', marginTop: '0.5rem'}}>
+                📅 <strong>Data:</strong> {poesia.data_poesia ? new Date(poesia.data_poesia).toLocaleDateString('it-IT', { 
                   day: 'numeric', 
                   month: 'long', 
                   year: 'numeric' 
-                })}
+                }) : '---'}
               </p>
               
             </div>
@@ -252,22 +254,40 @@ export default function DettaglioPoesia() {
                   className={theme === 'dark' ? 'nes-input is-dark' : 'nes-input'}
                   value={editTitolo}
                   onChange={(e) => setEditTitolo(e.target.value)}
-                  required
                 />
               </div>
 
-              <div className="nes-field" style={{marginBottom: '2rem'}}>
-                <label htmlFor="data_poesia" style={{marginBottom: '0.5rem', display: 'block'}}>
-                  Data della poesia:
+              <div className={'nes-field'} 
+              style={{marginBottom: '2rem'}}>
+                <label>
+                  <input 
+                    type="checkbox" 
+                    className={theme === 'light' ? 'nes-checkbox' : 'nes-checkbox is-dark'}
+                    checked={editUsaData}
+                    onChange={(e) => {
+                      setEditUsaData(e.target.checked)
+                      if (!e.target.checked) {
+                        setEditDataPoesia('') // Resetta la data se deseleziona
+                      }
+                    }}
+                  />
+                  <span>Vuoi specificare la data della poesia?</span>
                 </label>
-                <input
-                  type="date"
-                  id="data_poesia"
-                  className={theme === 'dark' ? 'nes-input is-dark' : 'nes-input'}
-                  value={editDataPoesia}
-                  onChange={(e) => setEditDataPoesia(e.target.value)}
-                  required
-                />
+                
+                {editUsaData && (
+                  <div style={{marginTop: '1rem'}}>
+                    <label htmlFor="data_poesia" style={{marginBottom: '0.5rem', display: 'block'}}>
+                      Data della poesia:
+                    </label>
+                    <input
+                      type="date"
+                      id="data_poesia"
+                      className={theme === 'dark' ? 'nes-input is-dark' : 'nes-input'}
+                      value={editDataPoesia}
+                      onChange={(e) => setEditDataPoesia(e.target.value)}
+                    />
+                  </div>
+                )}
               </div>
 
               <div className="nes-field" style={{marginBottom: '2rem'}}>
@@ -281,7 +301,7 @@ export default function DettaglioPoesia() {
                   onChange={(e) => setEditContenuto(e.target.value)}
                   rows="10"
                   required
-                  style={{minHeight: '300px'}}
+                  style={{minHeight: '300px', fontSize: '1.3rem'}}
                 />
               </div>
 

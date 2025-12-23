@@ -6,6 +6,10 @@ import { useAuth } from '../AuthContext'
 import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import CalendarIcon from '../components/CalendarIcon'
+import EyeIcon from '../components/EyeIcon'
+import BookIcon from '../components/BookIcon'
+import MagicIcon from '../components/MagicIcon'
 
 export default function Poesie() {
   const { theme } = useTheme()
@@ -57,8 +61,11 @@ export default function Poesie() {
   if (loading) {
     return (
       <main>
-        <h1 style={{ color: textColor, textAlign: 'center' }}>📜 Tutte le Poesie</h1>
-        <div className={containerClass} style={{marginTop: '2rem', textAlign: 'center'}}>
+        <h1 style={{ color: textColor, textAlign: 'center' }}>  
+          <BookIcon size={45} style={{ verticalAlign: 'top', marginRight: '1rem' }} /> 
+          Tutte le Poesie
+        </h1>        
+      <div className={containerClass} style={{marginTop: '2rem', textAlign: 'center'}}>
           <p>Caricamento poesie...</p>
         </div>
       </main>
@@ -68,8 +75,11 @@ export default function Poesie() {
   if (error) {
     return (
       <main>
-        <h1 style={{ color: textColor, textAlign: 'center' }}>📜 Tutte le Poesie</h1>
-        <div className="nes-container is-rounded is-error" style={{marginTop: '2rem'}}>
+        <h1 style={{ color: textColor, textAlign: 'center' }}>  
+          <BookIcon size={45} style={{ verticalAlign: 'top', marginRight: '1rem' }} /> 
+          Tutte le Poesie
+        </h1>        
+      <div className="nes-container is-rounded is-error" style={{marginTop: '2rem'}}>
           <p>Errore: {error}</p>
         </div>
       </main>
@@ -78,14 +88,18 @@ export default function Poesie() {
 
   return (
     <main>
-      <h1 style={{ color: textColor, textAlign: 'center' }}>📜 Tutte le Poesie</h1>
+      <h1 style={{ color: textColor, textAlign: 'center' }}>
+        <BookIcon size={45} style={{ verticalAlign: 'middle', marginRight: '1rem', marginBottom: '1rem'}} /> 
+        Tutte le Poesie
+      </h1>
       
       {poesie.length === 0 ? (
         <div className={containerClass} style={{marginTop: '2rem', textAlign: 'center'}}>
           <p>Nessuna poesia ancora pubblicata.</p>
           <p style={{marginTop: '1rem'}}>Sii il primo a condividere!</p>
           <Link href="/nuova" className="nes-btn is-success" style={{marginTop: '1rem'}}>
-            ✍️ Scrivi la prima poesia
+            <MagicIcon size={45}/>
+            Scrivi la prima poesia
           </Link>
         </div>
       ) : (
@@ -114,7 +128,7 @@ export default function Poesie() {
                 }}
                 >
                   <h3 style={{marginBottom: '0.5rem'}}>
-                    {poesia.titolo}
+                    {poesia.titolo || ''}
                   </h3>
                   
                   <p style={{fontSize: '1rem', opacity: 0.7, marginBottom: '1rem'}}>
@@ -137,8 +151,8 @@ export default function Poesie() {
                   </p>
                   
                   <div className="poesia-card-footer">
-                    <span>📅 {new Date(poesia.data_poesia).toLocaleDateString('it-IT')}</span>
-                    <span>👁️ Leggi tutto</span>
+                    <span><CalendarIcon size={20} />  {poesia.data_poesia ? new Date(poesia.data_poesia).toLocaleDateString('it-IT') : '---'}</span>
+                    <span><EyeIcon size={20} /> Leggi tutto</span>
                   </div>
                 </div>
               </Link>

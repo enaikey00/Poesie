@@ -5,6 +5,13 @@ import { useTheme } from './ThemeContext'
 import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase'
 import Link from 'next/link'
+import CupIcon from './components/CupIcon'
+import BookIcon from './components/BookIcon'
+import MagicIcon from './components/MagicIcon'
+import CalendarIcon from './components/CalendarIcon'
+import EyeIcon from './components/EyeIcon'
+import LockIcon from './components/LockIcon'
+import KeyIcon from './components/KeyIcon'
 
 export default function Home() {
   const { user, loading: authLoading } = useAuth()
@@ -46,12 +53,12 @@ export default function Home() {
 
   return (
     <main>
-      <h1 style={{ color: textColor, textAlign: 'center'}}>Poesie in condivisione</h1>
+      <h1 style={{ color: textColor, textAlign: 'center'}}>Poesie in condivisione <CupIcon size={20} /></h1>
       
       {/* Container di benvenuto */}
       <div className={containerClass}       
       style={{
-        marginTop: '2rem',
+        marginTop: '2rem', marginBottom: '3.5rem',
         borderColor: theme === 'dark' ? '#2d3339' : 'whitesmoke',
         }}>
         <p>Benvenuto nel sito delle poesie in condivisione.</p>
@@ -73,10 +80,12 @@ export default function Home() {
         {user && (
           <div style={{marginTop: '2rem'}}>
             <Link href="/nuova" className="nes-btn is-success">
-              ✍️ Scrivi una poesia
+              <MagicIcon size={20} />
+              Scrivi una poesia
             </Link>
             <Link href="/poesie" className="nes-btn" style={{marginLeft: '1rem'}}>
-              📜 Vedi tutte le poesie
+              <BookIcon size={20} />
+              Vedi tutte le poesie
             </Link>
           </div>
         )}
@@ -84,7 +93,7 @@ export default function Home() {
 
       {/* Sezione ultime poesie */}
       <div style={{marginTop: '3rem'}}>
-        <h2 style={{ color: textColor, marginBottom: '1.5rem' }}>
+        <h2 style={{ color: textColor, marginBottom: '1.5rem'}}>
           ✨ Ultime Poesie Pubblicate
         </h2>
 
@@ -97,7 +106,8 @@ export default function Home() {
             <p>Nessuna poesia ancora pubblicata.</p>
             {user && (
               <Link href="/nuova" className="nes-btn is-success" style={{marginTop: '1rem'}}>
-                ✍️ Sii il primo a pubblicare!
+                <MagicIcon size={20} />
+                Sii il primo a pubblicare!
               </Link>
             )}
           </div>
@@ -119,7 +129,7 @@ export default function Home() {
                     }}
                   >
                     <h3 style={{marginBottom: '0.5rem'}}>
-                      {poesia.titolo}
+                      {poesia.titolo || ''}
                     </h3>
                     
                     <p style={{fontSize: '1rem', opacity: 0.7, marginBottom: '1rem'}}>
@@ -142,8 +152,8 @@ export default function Home() {
                     </p>
 
                     <div className="poesia-card-footer">
-                      <span>📅 {new Date(poesia.data_poesia).toLocaleDateString('it-IT')}</span>
-                      <span>{user ? '👁️ Leggi tutto' : '🔒 Login richiesto'}</span>
+                      <span><CalendarIcon size={20} /> {poesia.data_poesia ? new Date(poesia.data_poesia).toLocaleDateString('it-IT') : '---'}</span>
+                      <span>{user ? <><EyeIcon size={20} /> Leggi tutto</> : <><LockIcon size={20} /> Login richiesto</>}</span>
                     </div>
                   </div>
                 )
@@ -166,16 +176,13 @@ export default function Home() {
 
             {/* Messaggio e bottone */}
             <div style={{marginTop: '2rem', textAlign: 'center'}}>
-              {!user && (
-                <p style={{ color: textColor, marginBottom: '1rem', fontSize: '0.9rem' }}>
-                  🔐 Fai login per leggere le poesie complete e scoprirne altre!
-                </p>
-              )}
+              
 
               <div>
                 {user ? (
                   <Link href="/poesie" className="nes-btn is-primary">
-                    📜 Vedi tutte le poesie
+                    <BookIcon size={20} />
+                    Vedi tutte le poesie
                   </Link>
                 ) : (
                   <div style={{position: 'relative', display: 'inline-block'}}>
@@ -201,7 +208,8 @@ export default function Home() {
                       }}
                       title="Devi fare login!"
                     >
-                      📜 Vedi tutte le poesie
+                      <BookIcon size={20} />
+                      Vedi tutte le poesie
                     </div>
                     <div 
                       style={{
@@ -223,7 +231,8 @@ export default function Home() {
                         visibility: showTooltip ? 'visible' : 'hidden',
                       }}
                     >
-                      🔑 Devi fare login!
+                      <KeyIcon size={20} />
+                      Devi fare login!
                     </div>
                   </div>
                 )}

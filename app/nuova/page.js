@@ -5,6 +5,8 @@ import { useAuth } from '../AuthContext'
 import { useTheme } from '../ThemeContext'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
+import MagicIcon from '../components/MagicIcon.js'
+import RocketIcon from '../components/RocketIcon.js'
 
 export default function NuovaPoesia() {
   const { user } = useAuth()
@@ -13,7 +15,9 @@ export default function NuovaPoesia() {
   
   const [titolo, setTitolo] = useState('')
   const [contenuto, setContenuto] = useState('')
-  const [dataPoesia, setDataPoesia] = useState(new Date().toISOString().split('T')[0]) // Data di oggi come default
+  //const [dataPoesia, setDataPoesia] = useState(new Date().toISOString().split('T')[0]) // Data di oggi come default
+  const [dataPoesia, setDataPoesia] = useState('')
+  const [usaData, setUsaData] = useState(false) // date checkbox
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -33,11 +37,11 @@ export default function NuovaPoesia() {
         .from('poesie')
         .insert([
           {
-            titolo: titolo,
+            titolo: titolo.trim() || null,  // Se vuoto, salva null
             contenuto: contenuto,
             autore: user.user_metadata?.nome || user.email,
             user_id: user.id,
-            data_poesia: dataPoesia
+            data_poesia: dataPoesia || null
           }
         ])
         .select()
@@ -61,7 +65,10 @@ export default function NuovaPoesia() {
 
   return (
     <main>
-      <h1 style={{ color: textColor }}>✍️ Scrivi una nuova poesia</h1>
+      <h1 style={{ color: textColor }}>
+        <MagicIcon size={45} style={{verticalAlign: 'middle'}}/> 
+        Scrivi una nuova poesia
+      </h1>
       
       <div className={containerClass} style={{marginTop: '2rem', maxWidth: '800px'}}>
         <form onSubmit={handleSubmit}>
@@ -76,26 +83,44 @@ export default function NuovaPoesia() {
               className={theme === 'dark' ? 'nes-input is-dark' : 'nes-input'}
               value={titolo}
               onChange={(e) => setTitolo(e.target.value)}
-              placeholder="Es: Una notte stellata"
-              required
+              placeholder="Opzionale"
             />
           </div>
 
-          <div className="nes-field" style={{marginBottom: '2rem'}}>
-            <label htmlFor="data_poesia" style={{marginBottom: '0.5rem', display: 'block'}}>
-              Data della poesia:
+          <div className={'nes-field'} 
+          style={{marginBottom: '2rem'}}>
+            <label>
+              <input 
+                type="checkbox" 
+                className={theme === 'light' ? 'nes-checkbox' : 'nes-checkbox is-dark'}
+                checked={usaData}
+                onChange={(e) => {
+                  setUsaData(e.target.checked)
+                  if (!e.target.checked) {
+                    setDataPoesia('') // Resetta la data se deseleziona
+                  }
+                }}
+              />
+              <span>Vuoi specificare la data della poesia?</span>
             </label>
-            <input
-              type="date"
-              id="data_poesia"
-              className={theme === 'dark' ? 'nes-input is-dark' : 'nes-input'}
-              value={dataPoesia}
-              onChange={(e) => setDataPoesia(e.target.value)}
-              required
-            />
-            <p style={{fontSize: '1rem', marginTop: '0.5rem', opacity: 0.7}}>
-              (La data in cui hai scritto la poesia)
-            </p>
+            
+            {usaData && (
+              <div style={{marginTop: '1rem'}}>
+                <label htmlFor="data_poesia" style={{marginBottom: '0.5rem', display: 'block'}}>
+                  Data della poesia:
+                </label>
+                <input
+                  type="date"
+                  id="data_poesia"
+                  className={theme === 'dark' ? 'nes-input is-dark' : 'nes-input'}
+                  value={dataPoesia}
+                  onChange={(e) => setDataPoesia(e.target.value)}
+                />
+                <p style={{fontSize: '1rem', marginTop: '0.5rem', opacity: 0.7}}>
+                  (La data in cui hai scritto la poesia)
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="nes-field" style={{marginBottom: '2rem'}}>
@@ -126,7 +151,17 @@ export default function NuovaPoesia() {
               className="nes-btn is-success"
               disabled={loading}
             >
-              {loading ? 'Pubblicazione...' : '📤 Pubblica'}
+              {loading ? (
+                <>
+                  <RocketIcon size={20} style={{ marginRight: '0.3rem' }} />
+                  Pubblicazione...
+                </>
+              ) : (
+                <>
+                  <RocketIcon size={20} style={{ marginRight: '0.3rem' }} />
+                  Pubblica
+                </>
+              )}
             </button>
 
             <button 
