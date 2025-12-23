@@ -195,9 +195,24 @@ div, p {
   }
 }
 
-/* ----------- Nes checkbox ----------- */
-/* Personalizzazione checkbox NES.css in base al tema */
+/* ----------- Filtri autore e data ----------- */
+/* Sidebar autori - responsive */
+.autori-sidebar {
+  display: block;
+}
 
+.autori-mobile {
+  display: none;
+}
 
-
+/* Tablet e sotto: nascondi sidebar, mostra dropdown */
+@media (max-width: 1024px) {
+  .autori-sidebar {
+    display: none;
+  }
+  
+  .autori-mobile {
+    display: block;
+  }
+}
 
