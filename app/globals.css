@@ -234,5 +234,6 @@ div, p {
   box-shadow: inset -4px -4px #adafbc;
 }
 
-
-
+#data_poesia, #titolo {
+  max-width: 50%;
+}
