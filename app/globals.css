@@ -73,7 +73,9 @@ div, p {
   text-align: center;
 }
 
-.nes-container.is-rounded, .nes-container.is-rounded.is-dark, .nes-input, .nes-input.is-dark, .nes-textarea, .nes-textarea.is-dark{
+.nes-container.is-rounded, .nes-container.is-rounded.is-dark, 
+.nes-input, .nes-input.is-dark, 
+.nes-textarea, .nes-textarea.is-dark {
   border-image: unset;
   box-shadow: inset -4px -4px #adafbc;
   /*
@@ -215,4 +217,22 @@ div, p {
     display: block;
   }
 }
+
+/* Stile per il wrapper del select */
+
+/* Stile per il select interno */
+.nes-select.is-dark > select {
+  border-image: unset;
+  border-color: #2d3339;
+  box-shadow: inset -4px -4px #adafbc;
+}
+
+/* Stile per il select interno */
+.nes-select > select {
+  border-image: unset;
+  border-color: whitesmoke;
+  box-shadow: inset -4px -4px #adafbc;
+}
+
+
 

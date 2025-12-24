@@ -220,17 +220,17 @@ export default function Poesie() {
             {/* Filtro autori - Mobile (dropdown) */}
             <div className="autori-mobile" style={{ marginBottom: '1rem' }}>
               <div className="nes-field">
-                <label htmlFor="autore-mobile" style={{fontSize: '0.8rem', marginBottom: '0.5rem', display: 'block'}}>
-                  👥 Autore:
+                <label htmlFor="autore-mobile" style={{fontSize: '0.8rem', marginBottom: '0.5rem', display: 'block', color: 'transparent'}}>
+                  Autore:
                 </label>
-                <div className="nes-select" style={theme === 'dark' ? {backgroundColor: '#212529'} : {}}>
+                <div className={theme === 'dark' ? 'nes-select is-dark' : 'nes-select'}>
                   <select
                     id="autore-mobile"
                     value={autoreSelezionato}
                     onChange={(e) => setAutoreSelezionato(e.target.value)}
                     style={{color: textColor}}
                   >
-                    <option value="">Tutti gli autori</option>
+                    <option value="">Tutti gli Autori</option>
                     {autori.map(autore => (
                       <option key={autore} value={autore}>{autore}</option>
                     ))}
