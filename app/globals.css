@@ -234,6 +234,11 @@ div, p {
   box-shadow: inset -4px -4px #adafbc;
 }
 
+/* Nuova Poesia */
 #data_poesia, #titolo {
-  max-width: 50%;
+  max-width: 100%;
+}
+
+#data_poesia {
+  padding: 10% ;
 }
