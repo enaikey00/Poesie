@@ -6,8 +6,8 @@ import Navbar from './components/Navbar';
 import { Analytics } from "@vercel/analytics/next"
 
 export const metadata = {
-  title: 'Poesie Retrò',
-  description: 'Un sito per condividere poesie in stile retrò',
+  title: 'Poesie in condivisione',
+  description: 'Un sito per condividere poesie.',
 }
 
 export default function RootLayout({ children }) {
